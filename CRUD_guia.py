@@ -36,12 +36,14 @@ def limpiar_campos():
 def crear():
     mi_conexion = sqlite3.connect("Usuarios")
     mi_cursor = mi_conexion.cursor()
-    mi_cursor.execute("INSERT INTO DATOS_USUARIOS VALUES(NULL,'" + mi_nombre.get() +
+    datos = mi_nombre.get(),mi_apellido.get(),mi_pass.get(),mi_direccion.get(),texto_comentario.get("1.0",END)
+    mi_cursor.execute("INSERT INTO DATOS_USUARIOS VALUES(NULL,?,?,?,?,?)",(datos))
+    """mi_cursor.execute("INSERT INTO DATOS_USUARIOS VALUES(NULL,'" + mi_nombre.get() +
                       "','" + mi_apellido.get() +
                       "','" + mi_pass.get() +
                       "','" + mi_direccion.get() +
                       "','" + texto_comentario.get("1.0",END)+"')")
-
+    """
     mi_conexion.commit()
     messagebox.showinfo("BBDD","Registro insertado con exito")
 
@@ -62,12 +64,15 @@ def leer():
 def actualizar():
     mi_conexion = sqlite3.connect("Usuarios")
     mi_cursor = mi_conexion.cursor()
-    mi_cursor.execute("UPDATE DATOS_USUARIOS SET NOMBRE_USUARIO= '"+ mi_nombre.get()+
+    datos = mi_nombre.get(), mi_apellido.get(), mi_pass.get(), mi_direccion.get(), texto_comentario.get("1.0", END)
+    mi_cursor.execute("UPDATE  DATOS_USUARIOS SET NOMBRE_USUARIO=?,APELLIDO=?,PASSWORD=?,DIRECCION=?,COMENTARIOS=?"+
+                      "WHERE ID="+mi_id.get(),(datos))
+    """mi_cursor.execute("UPDATE DATOS_USUARIOS SET NOMBRE_USUARIO= '"+ mi_nombre.get()+
                       "',APELLIDO='"+mi_apellido.get()+
                       "',PASSWORD='"+mi_pass.get()+
                       "',DIRECCION='"+mi_direccion.get()+
                       "',COMENTARIOS='"+texto_comentario.get("1.0",END)+
-                      "'WHERE ID =" + mi_id.get())
+                      "'WHERE ID =" + mi_id.get())"""
 
     mi_conexion.commit()
     messagebox.showinfo("BBDD", "Registro actualizado  con exito")
